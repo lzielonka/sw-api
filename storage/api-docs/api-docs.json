@@ -1,0 +1,705 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Star Wars Api",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Laravel Star Wars Api"
+        }
+    ],
+    "paths": {
+        "/api/characters": {
+            "get": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Get paginated list of characters",
+                "description": "Returns paginated list of characters",
+                "operationId": "App\\Http\\Controllers\\Api\\CharacterController::index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Store new character",
+                "description": "Returns character data",
+                "operationId": "storeCharacter",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Master Yoda"
+                                    },
+                                    "planet_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/characters/{id}": {
+            "get": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Get character information",
+                "description": "Returns character data",
+                "operationId": "getCharacterById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Update existing character",
+                "description": "Returns updated character data",
+                "operationId": "updateCharacter",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Master Yoda"
+                                    },
+                                    "planet_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Delete existing character",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteCharacter",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/characters/{character_id}/friends/{friend_id}": {
+            "post": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Add a friend for character",
+                "description": "Returns character data",
+                "operationId": "addFriend",
+                "parameters": [
+                    {
+                        "name": "character_id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "friend_id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Characters"
+                ],
+                "summary": "Remove a friend for character",
+                "description": "Returns character data",
+                "operationId": "removeFriend",
+                "parameters": [
+                    {
+                        "name": "character_id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "friend_id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/episodes": {
+            "get": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Get paginated list of episodes",
+                "description": "Returns paginated list of episodes",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Store new episode",
+                "description": "Returns episode data",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "LASTJEDI"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/episodes/{id}": {
+            "get": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Get episode information",
+                "description": "Returns episode data",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Episode id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Update existing episode",
+                "description": "Returns updated episode data",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Episode id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "LASTJEDI"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Delete existing episode",
+                "description": "Deletes a record and returns no content",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Episode id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/episodes/{episode_id}/characters/{character_id}": {
+            "post": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Add a character to episode",
+                "description": "Returns episode data",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::addCharacter",
+                "parameters": [
+                    {
+                        "name": "episode_id",
+                        "in": "path",
+                        "description": "Episode id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "character_id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Episodes"
+                ],
+                "summary": "Remove a character from episode",
+                "description": "Returns episode data",
+                "operationId": "App\\Http\\Controllers\\Api\\EpisodeController::removeCharacter",
+                "parameters": [
+                    {
+                        "name": "episode_id",
+                        "in": "path",
+                        "description": "Episode id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "character_id",
+                        "in": "path",
+                        "description": "Character id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/planets": {
+            "get": {
+                "tags": [
+                    "Planets"
+                ],
+                "summary": "Get paginated list of planets",
+                "description": "Returns paginated list of planets",
+                "operationId": "App\\Http\\Controllers\\Api\\PlanetController::index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Planets"
+                ],
+                "summary": "Store new planet",
+                "description": "Returns planet data",
+                "operationId": "App\\Http\\Controllers\\Api\\PlanetController::store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tatooine"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/planets/{id}": {
+            "get": {
+                "tags": [
+                    "Planets"
+                ],
+                "summary": "Get planet information",
+                "description": "Returns planet data",
+                "operationId": "App\\Http\\Controllers\\Api\\PlanetController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Planet id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Planets"
+                ],
+                "summary": "Delete existing planet",
+                "description": "Deletes a record and returns no content",
+                "operationId": "App\\Http\\Controllers\\Api\\PlanetController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Planet id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/planet/{id}": {
+            "put": {
+                "tags": [
+                    "Planets"
+                ],
+                "summary": "Update existing planet",
+                "description": "Returns updated planet data",
+                "operationId": "App\\Http\\Controllers\\Api\\PlanetController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Planet id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Tatooine"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Characters",
+            "description": "API Endpoints of Characters"
+        },
+        {
+            "name": "Planets",
+            "description": "API Endpoints of Planets"
+        },
+        {
+            "name": "Episodes",
+            "description": "API Endpoints of Episodes"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
